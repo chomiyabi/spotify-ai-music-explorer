@@ -1,0 +1,36 @@
+{
+  "name": "spotify-ai-music-explorer",
+  "version": "1.0.0",
+  "description": "AI-powered Spotify music discovery application with natural language search",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "server:dev": "cd server && npm run dev",
+    "client:dev": "cd client && npm start",
+    "build": "npm run server:build && npm run client:build",
+    "build:prod": "npm run server:build:prod && npm run client:build:prod",
+    "server:build": "cd server && npm run build",
+    "server:build:prod": "cd server && npm run build:prod",
+    "client:build": "cd client && npm run build",
+    "client:build:prod": "cd client && npm run build:prod",
+    "start": "npm run server:start",
+    "server:start": "cd server && npm run start",
+    "server:start:prod": "cd server && npm run start:prod",
+    "test": "npm run server:test && npm run client:test",
+    "server:test": "cd server && npm test",
+    "client:test": "cd client && npm run test:coverage",
+    "health": "cd server && npm run health",
+    "setup": "npm install && cd server && npm install && cd ../client && npm install"
+  },
+  "keywords": ["spotify", "music", "ai", "search", "react", "typescript", "claude"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/spotify-ai-music-explorer"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0"
+  }
+}

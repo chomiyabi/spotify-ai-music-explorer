@@ -1,27 +1,16 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "client/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "buildCommand": "npm run build:prod"
-      }
-    }
-  ],
+  "buildCommand": "cd client && npm run build:prod",
+  "outputDirectory": "client/build",
+  "installCommand": "cd client && npm install",
+  "framework": null,
   "routes": [
     {
       "handle": "filesystem"
     },
     {
       "src": "/(.*)",
-      "dest": "client/build/index.html"
+      "dest": "/index.html"
     }
-  ],
-  "buildCommand": "cd client && npm run build:prod",
-  "outputDirectory": "client/build",
-  "installCommand": "cd client && npm install",
-  "env": {
-    "REACT_APP_API_URL": "@react_app_api_url"
-  }
+  ]
 }

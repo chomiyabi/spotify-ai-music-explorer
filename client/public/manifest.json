@@ -1,0 +1,80 @@
+{
+  "short_name": "Spotify AI Explorer",
+  "name": "Spotify AI Music Explorer",
+  "description": "AI自然言語検索でSpotifyの音楽を発見",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#1DB954",
+  "background_color": "#121212",
+  "categories": ["music", "entertainment", "multimedia"],
+  "lang": "ja",
+  "scope": "/",
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "AI検索",
+      "short_name": "AI検索",
+      "description": "AI自然言語検索を開始",
+      "url": "/#ai-search",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "プリセット",
+      "short_name": "プリセット",
+      "description": "人気プリセット機能",
+      "url": "/#presets",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "AI音楽検索画面"
+    },
+    {
+      "src": "screenshot-narrow.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "モバイル版AI音楽検索"
+    }
+  ]
+}

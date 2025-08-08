@@ -17,19 +17,40 @@ const EnhancedTrackList: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(12);
 
-  // ページネーション用の計算
-  const totalPages = Math.ceil(filteredTracks.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentTracks = filteredTracks.slice(startIndex, endIndex);
-
-  // 表示用のトラック一覧（フィルター適用後またはオリジナル）
+  // 表示用のトラック一覧（デフォルトで人気度順にソート、フィルター適用後は適用後のデータ）
   const displayTracks = useMemo(() => {
-    if (filterOptions && filteredTracks.length > 0) {
+    const originalTracks = state.currentData?.tracks || [];
+    if (originalTracks.length === 0) {
+      return [];
+    }
+
+    // フィルターが実際に何らかの変更を含んでいる場合のみフィルター結果を使用
+    const hasActiveFilters = filterOptions && (
+      filterOptions.searchQuery ||
+      filterOptions.minPopularity > 0 ||
+      filterOptions.showPreviewOnly ||
+      filterOptions.sortBy !== 'popularity' ||
+      filterOptions.sortOrder !== 'desc'
+    );
+
+    if (hasActiveFilters && filteredTracks.length >= 0) {
+      // フィルターが適用されている場合はフィルター結果を返す
       return filteredTracks;
     }
-    return state.currentData?.tracks || [];
+    
+    // デフォルトで人気度降順にソートして表示
+    return [...originalTracks].sort((a, b) => {
+      const popularityA = a.popularity || 0;
+      const popularityB = b.popularity || 0;
+      return popularityB - popularityA; // 降順（高い人気度が先）
+    });
   }, [filteredTracks, filterOptions, state.currentData?.tracks]);
+
+  // ページネーション用の計算（displayTracksベース）
+  const totalPages = Math.ceil(displayTracks.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentTracks = displayTracks.slice(startIndex, endIndex);
 
   const handleTrackSelect = useCallback((track: Track) => {
     setSelectedTrack(track);

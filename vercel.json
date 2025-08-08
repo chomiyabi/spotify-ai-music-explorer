@@ -1,16 +1,5 @@
 {
-  "version": 2,
   "buildCommand": "cd client && npm run build:prod",
   "outputDirectory": "client/build",
-  "installCommand": "cd client && npm install",
-  "framework": null,
-  "routes": [
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ]
+  "installCommand": "cd client && npm install"
 }

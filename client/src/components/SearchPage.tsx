@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PresetSection from './PresetSection';
 import AISearchSection from './AISearchSection';
@@ -8,10 +8,26 @@ import { useAppContext } from '../context/AppContext';
 const SearchPage: React.FC = () => {
   const navigate = useNavigate();
   const { state } = useAppContext();
+  const resultsRef = useRef<HTMLDivElement>(null);
 
   const handleBackToHome = () => {
     navigate('/');
   };
+
+  // 検索結果が更新されたときに自動スクロール
+  useEffect(() => {
+    if (state.currentData && resultsRef.current) {
+      // ローディング完了後に少し遅延してスクロール
+      const scrollTimeout = setTimeout(() => {
+        resultsRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 300);
+
+      return () => clearTimeout(scrollTimeout);
+    }
+  }, [state.currentData]);
 
   return (
     <div className="search-page">
@@ -32,7 +48,7 @@ const SearchPage: React.FC = () => {
 
       {/* 結果表示 */}
       {state.currentData && (
-        <div className="results-section">
+        <div className="results-section" ref={resultsRef}>
           <EnhancedTrackList />
         </div>
       )}

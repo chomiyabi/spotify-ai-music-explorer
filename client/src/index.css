@@ -2427,7 +2427,29 @@ code {
 }
 
 .results-section {
-  padding: 0 2rem 2rem;
+  padding: 2rem 2rem 2rem;
+  scroll-margin-top: 2rem;
+  position: relative;
+}
+
+.results-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #1DB954, #1ed760, #1DB954);
+  animation: pulse-gradient 2s ease-in-out infinite;
+}
+
+@keyframes pulse-gradient {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .search-placeholder {

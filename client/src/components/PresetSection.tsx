@@ -63,12 +63,28 @@ const PresetSection: React.FC = () => {
       console.error('Preset fetch error:', error);
       let errorMessage = 'データの取得に失敗しました';
       
+      // デバッグ情報を含めた詳細なエラーメッセージ
       if (error.response) {
         // サーバーからのレスポンスエラー
-        errorMessage = error.response.data?.error || `サーバーエラー: ${error.response.status}`;
+        errorMessage = `サーバーエラー: ${error.response.status}`;
+        if (error.response.data?.error) {
+          errorMessage += ` - ${error.response.data.error}`;
+        }
+        console.error('Response error:', error.response);
       } else if (error.request) {
-        // ネットワークエラー
+        // ネットワークエラー（モバイルで多い）
         errorMessage = 'ネットワークエラー: サーバーに接続できません';
+        console.error('Network error - No response received');
+        console.error('Request URL:', error.config?.url);
+        console.error('Base URL:', error.config?.baseURL);
+        
+        // モバイル用の追加デバッグ情報
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+          errorMessage += ' (モバイル接続エラー)';
+          console.error('Mobile device detected');
+          console.error('Protocol:', window.location.protocol);
+          console.error('API URL:', process.env.REACT_APP_API_URL);
+        }
       } else {
         // その他のエラー
         errorMessage = error.message || '予期しないエラーが発生しました';

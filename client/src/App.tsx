@@ -6,6 +6,7 @@ import WelcomeSection from './components/WelcomeSection';
 import PresetSection from './components/PresetSection';
 import AISearchSection from './components/AISearchSection';
 import EnhancedTrackList from './components/EnhancedTrackList';
+import DebugInfo from './components/DebugInfo';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <EnhancedTrackList />
           </div>
         </Layout>
+        <DebugInfo />
       </AppProvider>
     </ErrorBoundary>
   );

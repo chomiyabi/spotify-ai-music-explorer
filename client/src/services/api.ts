@@ -1,19 +1,59 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
+// APIベースURLの設定（末尾の/apiがない場合は追加）
+const API_BASE_URL = (() => {
+  const url = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+  // URLが/apiで終わっていない場合は追加
+  return url.endsWith('/api') ? url : `${url}/api`;
+})();
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
+    'Accept': 'application/json',
   },
+  withCredentials: false, // モバイル対応のため無効化
 });
 
-apiClient.interceptors.response.use(
-  (response) => response,
+// デバッグ用ログ
+console.log('API Base URL:', API_BASE_URL);
+
+apiClient.interceptors.request.use(
+  (config) => {
+    // モバイルブラウザ用のヘッダー追加
+    config.headers['X-Requested-With'] = 'XMLHttpRequest';
+    console.log('API Request:', config.method?.toUpperCase(), config.url);
+    return config;
+  },
   (error) => {
-    console.error('API Error:', error.response?.data || error.message);
+    console.error('Request Error:', error);
+    return Promise.reject(error);
+  }
+);
+
+apiClient.interceptors.response.use(
+  (response) => {
+    console.log('API Response:', response.status, response.config.url);
+    return response;
+  },
+  (error) => {
+    console.error('API Error Details:', {
+      url: error.config?.url,
+      method: error.config?.method,
+      status: error.response?.status,
+      data: error.response?.data,
+      message: error.message,
+      baseURL: error.config?.baseURL
+    });
+    
+    // ネットワークエラーの場合
+    if (!error.response) {
+      console.error('Network Error - No response from server');
+      console.error('Possible CORS issue or server is down');
+    }
+    
     return Promise.reject(error);
   }
 );

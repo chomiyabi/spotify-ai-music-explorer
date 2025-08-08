@@ -20,7 +20,7 @@ const MobileDebug: React.FC = () => {
     // ヘルスチェックを実行
     fetch(`${fullApiUrl}/health`)
       .then(res => {
-        setInfo(prev => ({
+        setInfo((prev: any) => ({
           ...prev,
           healthStatus: res.status,
           healthOk: res.ok
@@ -28,13 +28,13 @@ const MobileDebug: React.FC = () => {
         return res.text();
       })
       .then(text => {
-        setInfo(prev => ({
+        setInfo((prev: any) => ({
           ...prev,
           healthResponse: text
         }));
       })
       .catch(error => {
-        setInfo(prev => ({
+        setInfo((prev: any) => ({
           ...prev,
           healthError: error.message
         }));

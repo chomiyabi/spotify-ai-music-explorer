@@ -18,14 +18,14 @@ const DebugInfo: React.FC = () => {
     // ヘルスチェック
     apiService.healthCheck()
       .then(response => {
-        setDebugData(prev => ({
+        setDebugData((prev: any) => ({
           ...prev,
           healthCheck: 'OK',
           healthResponse: response
         }));
       })
       .catch(error => {
-        setDebugData(prev => ({
+        setDebugData((prev: any) => ({
           ...prev,
           healthCheck: 'Failed',
           error: error.message,

@@ -16,18 +16,58 @@ const SearchPage: React.FC = () => {
 
   // 検索結果が更新されたときに自動スクロール
   useEffect(() => {
-    if (state.currentData && resultsRef.current) {
-      // ローディング完了後に少し遅延してスクロール
+    if (state.currentData && resultsRef.current && !state.isLoading) {
+      // ローディング完了後に遅延してスクロール（デスクトップ対応）
       const scrollTimeout = setTimeout(() => {
-        resultsRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }, 300);
+        if (resultsRef.current) {
+          console.log('Scrolling to results section'); // デバッグ用
+          
+          // 複数の方法でスクロールを試行
+          try {
+            // Method 1: scrollIntoView
+            resultsRef.current.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          } catch (error) {
+            console.log('scrollIntoView failed, trying alternative method');
+            
+            // Method 2: window.scrollTo
+            const rect = resultsRef.current.getBoundingClientRect();
+            const scrollTop = window.pageYOffset + rect.top - 100; // 100px offset
+            
+            window.scrollTo({
+              top: scrollTop,
+              behavior: 'smooth'
+            });
+          }
+        }
+      }, 600); // 遅延を600msに増加
 
       return () => clearTimeout(scrollTimeout);
     }
-  }, [state.currentData]);
+  }, [state.currentData, state.isLoading]);
+
+  // 追加のスクロール処理: isLoadingがfalseになったときも実行
+  useEffect(() => {
+    if (!state.isLoading && state.currentData && resultsRef.current) {
+      const scrollTimeout = setTimeout(() => {
+        if (resultsRef.current) {
+          console.log('Additional scroll attempt after loading complete');
+          
+          const rect = resultsRef.current.getBoundingClientRect();
+          const scrollTop = window.pageYOffset + rect.top - 80;
+          
+          window.scrollTo({
+            top: scrollTop,
+            behavior: 'smooth'
+          });
+        }
+      }, 200);
+
+      return () => clearTimeout(scrollTimeout);
+    }
+  }, [state.isLoading, state.currentData]);
 
   return (
     <div className="search-page">

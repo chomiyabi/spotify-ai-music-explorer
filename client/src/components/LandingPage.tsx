@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import WelcomeSection from './WelcomeSection';
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -20,15 +19,24 @@ const LandingPage: React.FC = () => {
           <div className="hero-features">
             <div className="feature-item">
               <span className="feature-icon">🎵</span>
-              <span className="feature-text">AIによる自然言語検索</span>
+              <div className="feature-content">
+                <span className="feature-title">AIによる自然言語検索</span>
+                <span className="feature-description">「リラックスできるジャズ」「エネルギッシュなロック」など、自然な言葉で音楽を検索。AIが感情やムードを理解して最適な楽曲を提案します。</span>
+              </div>
             </div>
             <div className="feature-item">
               <span className="feature-icon">📊</span>
-              <span className="feature-text">詳細な楽曲分析と可視化</span>
+              <div className="feature-content">
+                <span className="feature-title">詳細な楽曲分析と可視化</span>
+                <span className="feature-description">人気度、ジャンル、アーティスト情報を美しいカード形式で表示。フィルタリングやソート機能で理想の楽曲を素早く発見できます。</span>
+              </div>
             </div>
             <div className="feature-item">
               <span className="feature-icon">🎧</span>
-              <span className="feature-text">プレビュー再生機能</span>
+              <div className="feature-content">
+                <span className="feature-title">プレビュー再生機能</span>
+                <span className="feature-description">気になる楽曲は30秒プレビューで即座に試聴。Spotifyへ直接アクセスしてフル再生も可能です。</span>
+              </div>
             </div>
           </div>
           <button className="hero-cta-btn" onClick={handleStartSearch}>
@@ -45,8 +53,6 @@ const LandingPage: React.FC = () => {
         </div>
       </div>
 
-      <WelcomeSection />
-      
       <div className="cta-section">
         <h2>今すぐ音楽の世界を探索しましょう</h2>
         <p>プリセットまたはAI検索で、あなたの音楽体験を拡張してください。</p>

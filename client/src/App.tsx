@@ -6,14 +6,12 @@ import Layout from './components/Layout';
 import LandingPage from './components/LandingPage';
 import SearchPage from './components/SearchPage';
 import DebugInfo from './components/DebugInfo';
-import MobileDebug from './components/MobileDebug';
 
 function App() {
   return (
     <ErrorBoundary>
       <AppProvider>
         <Router>
-          <MobileDebug />
           <Layout>
             <div className="max-w-6xl mx-auto">
               <Routes>

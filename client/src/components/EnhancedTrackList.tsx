@@ -2,7 +2,7 @@ import React, { useState, useMemo, useCallback } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { Track } from '../context/AppContext';
 import EnhancedTrackCard from './EnhancedTrackCard';
-import TrackModal from './TrackModal';
+import TrackDetailModal from './TrackDetailModal';
 import TrackFilter, { FilterOptions } from './TrackFilter';
 import Pagination from './Pagination';
 import LoadingSpinner from './LoadingSpinner';
@@ -230,7 +230,7 @@ const EnhancedTrackList: React.FC = () => {
       )}
 
       {/* モーダル */}
-      <TrackModal
+      <TrackDetailModal
         track={selectedTrack}
         isOpen={isModalOpen}
         onClose={handleCloseModal}

@@ -23,7 +23,6 @@ const TrackFilter: React.FC<TrackFilterProps> = ({ tracks, onFilterChange }) => 
     showPreviewOnly: false,
   });
   const [isExpanded, setIsExpanded] = useState(false); // デフォルトで折りたたみ
-  const [hasBeenUsed, setHasBeenUsed] = useState(false); // フィルターが使用されたかどうか
 
   const applyFilters = (newOptions: FilterOptions) => {
     let filtered = [...tracks];
@@ -91,7 +90,6 @@ const TrackFilter: React.FC<TrackFilterProps> = ({ tracks, onFilterChange }) => 
   const updateFilter = (updates: Partial<FilterOptions>) => {
     const newOptions = { ...filterOptions, ...updates };
     setFilterOptions(newOptions);
-    setHasBeenUsed(true); // フィルターが使用されたことをマーク
     applyFilters(newOptions);
   };
 
@@ -104,7 +102,6 @@ const TrackFilter: React.FC<TrackFilterProps> = ({ tracks, onFilterChange }) => 
       showPreviewOnly: false,
     };
     setFilterOptions(defaultOptions);
-    setHasBeenUsed(false); // リセット時はフィルター未使用状態に戻す
     // リセット時はフィルターを無効化して、EnhancedTrackListのデフォルトソートを使用
     onFilterChange([], defaultOptions);
   };

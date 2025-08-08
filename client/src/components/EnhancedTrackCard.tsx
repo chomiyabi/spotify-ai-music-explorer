@@ -14,7 +14,6 @@ const EnhancedTrackCard: React.FC<EnhancedTrackCardProps> = ({
 }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handleSpotifyClick = () => {
@@ -51,6 +50,13 @@ const EnhancedTrackCard: React.FC<EnhancedTrackCardProps> = ({
     }
   };
 
+  const handleDetailsClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onTrackSelect) {
+      onTrackSelect(track);
+    }
+  };
+
   const getPopularityColor = (popularity?: number) => {
     if (!popularity) return '#666';
     if (popularity >= 80) return '#1DB954';
@@ -69,7 +75,7 @@ const EnhancedTrackCard: React.FC<EnhancedTrackCardProps> = ({
 
   return (
     <div 
-      className={`enhanced-track-card ${showDetails ? 'expanded' : ''}`}
+      className="enhanced-track-card"
       onClick={handleCardClick}
     >
       {/* Audio element for preview */}
@@ -185,10 +191,7 @@ const EnhancedTrackCard: React.FC<EnhancedTrackCardProps> = ({
           
           <button 
             className="action-btn details-btn"
-            onClick={(e) => {
-              e.stopPropagation();
-              setShowDetails(!showDetails);
-            }}
+            onClick={handleDetailsClick}
             title="詳細表示"
           >
             <span className="btn-icon">ⓘ</span>

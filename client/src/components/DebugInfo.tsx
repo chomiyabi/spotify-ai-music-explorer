@@ -42,8 +42,12 @@ const DebugInfo: React.FC = () => {
       });
   }, []);
 
-  // 開発環境またはデバッグモードでのみ表示
-  if (process.env.NODE_ENV === 'production' && !window.location.search.includes('debug=true')) {
+  // デバッグモードの確認（URLに ?debug=true があるか）
+  const isDebugMode = window.location.search.includes('debug=true') || 
+                      window.location.search.includes('debug') ||
+                      window.location.hash.includes('debug');
+  
+  if (!isDebugMode) {
     return null;
   }
 

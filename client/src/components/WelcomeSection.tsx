@@ -1,9 +1,19 @@
 import React from 'react';
 
 const WelcomeSection: React.FC = () => {
+  // デバッグ用：API URLを表示
+  const apiUrl = process.env.REACT_APP_API_URL || 'API URL not set';
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  
   return (
     <div className="text-center mb-12">
       <div className="max-w-4xl mx-auto">
+        {/* モバイルまたはデバッグモードの場合、API情報を表示 */}
+        {(isMobile || window.location.search.includes('debug')) && (
+          <div className="bg-red-600 text-white p-2 mb-4 text-xs rounded">
+            API: {apiUrl} | Mobile: {isMobile ? 'Yes' : 'No'}
+          </div>
+        )}
         <h2 className="text-4xl font-bold text-white mb-6">
           音楽データの世界へようこそ
         </h2>

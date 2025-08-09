@@ -263,6 +263,11 @@ router.post('/play', async (req: Request, res: Response) => {
       res.setHeader('X-DJ-Artists', top3Artists);
       res.setHeader('X-Demo-Mode', 'true');
       
+      // モバイル対応のCORSヘッダー
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+      
       return res.send(mockAudioBuffer);
     }
 
@@ -382,6 +387,12 @@ router.post('/play', async (req: Request, res: Response) => {
               res.setHeader('X-DJ-Artists', top3Artists);
               res.setHeader('X-Audio-Size', audioBuffer.length);
               
+              // モバイル対応のCORSヘッダー
+              res.setHeader('Access-Control-Allow-Origin', '*');
+              res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+              res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+              res.setHeader('Access-Control-Expose-Headers', 'X-DJ-Artists, X-Audio-Size');
+              
               // チャンク単位でストリーミング送信
               const chunkSize = 8192; // 8KB chunks
               let offset = 0;
@@ -421,6 +432,12 @@ router.post('/play', async (req: Request, res: Response) => {
     res.setHeader('Content-Type', 'audio/wav');
     res.setHeader('Content-Disposition', 'attachment; filename="dj-talk.wav"');
     res.setHeader('X-DJ-Artists', top3Artists); // ヘッダーでアーティスト情報も送信
+    
+    // モバイル対応のCORSヘッダー
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Expose-Headers', 'X-DJ-Artists');
     
     res.send(Buffer.from(difyResponse.data));
 

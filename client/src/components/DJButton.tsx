@@ -86,7 +86,12 @@ const DJButton: React.FC<DJButtonProps> = ({ onPlay, className = '' }) => {
       console.log('Requesting DJ voice generation...');
       
       // DJ統合APIを呼び出し
-      const response = await fetch('http://localhost:5001/api/dj/play', {
+      const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+      const apiUrl = `${API_BASE_URL}/api/dj/play`;
+      
+      console.log('Calling DJ API:', apiUrl);
+      
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -125,9 +130,14 @@ const DJButton: React.FC<DJButtonProps> = ({ onPlay, className = '' }) => {
       const audio = new Audio();
       audioRef.current = audio;
       
-      // 音声再生の設定
+      // 音声再生の設定（モバイル対応）
       audio.preload = 'auto';
       audio.volume = 0.8;
+      audio.crossOrigin = 'anonymous'; // CORS対応
+      
+      // モバイルブラウザ対応の設定
+      audio.setAttribute('playsinline', 'true');
+      audio.setAttribute('webkit-playsinline', 'true');
 
       // 音声イベントリスナーを設定
       const handleCanPlay = () => {
@@ -143,14 +153,25 @@ const DJButton: React.FC<DJButtonProps> = ({ onPlay, className = '' }) => {
         setIsAudioLoaded(true);
         setState('playing');
         
-        // 再生開始
+        // 再生開始（モバイル対応）
         const playPromise = audio.play();
         if (playPromise !== undefined) {
           playPromise.then(() => {
             console.log('Audio: play started successfully');
           }).catch((error) => {
             console.error('Audio play error:', error);
-            setError(`音声の再生に失敗しました: ${error.message}`);
+            console.error('Error details:', {
+              name: error.name,
+              message: error.message,
+              code: error.code
+            });
+            
+            // モバイルブラウザでの自動再生失敗時の対応
+            if (error.name === 'NotAllowedError') {
+              setError('音声再生にはユーザー操作が必要です。もう一度ボタンを押してください。');
+            } else {
+              setError(`音声の再生に失敗しました: ${error.message}`);
+            }
             setState('idle');
           });
         }
@@ -283,7 +304,27 @@ const DJButton: React.FC<DJButtonProps> = ({ onPlay, className = '' }) => {
 
     } catch (error: any) {
       console.error('DJ API error:', error);
-      setError(error.message || 'AI DJ機能でエラーが発生しました');
+      console.error('Error details:', {
+        name: error.name,
+        message: error.message,
+        status: error.status,
+        type: error.type
+      });
+      
+      // エラーの種類に応じた適切なメッセージ
+      let errorMessage = 'AI DJ機能でエラーが発生しました';
+      
+      if (error.name === 'NetworkError' || error.message.includes('Failed to fetch')) {
+        errorMessage = 'ネットワークエラーです。接続を確認してください。';
+      } else if (error.status === 500) {
+        errorMessage = 'サーバーエラーです。しばらく待ってから再試行してください。';
+      } else if (error.status === 429) {
+        errorMessage = 'リクエストが多すぎます。しばらく待ってから再試行してください。';
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      setError(errorMessage);
       setState('idle');
     }
   };

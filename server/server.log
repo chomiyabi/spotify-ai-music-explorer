@@ -1,0 +1,58 @@
+
+> server@1.0.0 start
+> node dist/index.js
+
+[dotenv@17.2.1] injecting env (8) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+[dotenv@17.2.1] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+Claude API key not configured. AI search will use fallback mode.
+[dotenv@17.2.1] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+Server is running on port 5001
+Health check: http://localhost:5001/api/health
+Test search: http://localhost:5001/api/test/search?q=shape of you
+Spotify access token obtained successfully
+Using Dify service for DJ text generation...
+Sending request to Dify: {
+  workflow_id: 'your_dify_workflow_id_here',
+  inputs_keys: [
+    'chart_data',
+    'chart_title',
+    'chart_type',
+    'date',
+    'region',
+    'style',
+    'length'
+  ]
+}
+Dify service error: {
+  message: 'Request failed with status code 401',
+  status: 401,
+  data: {
+    code: 'unauthorized',
+    message: 'Access token is invalid',
+    status: 401
+  }
+}
+Dify generation failed, using template fallback: Dify authentication failed. Please check API key.
+Using Dify service for DJ text generation...
+Sending request to Dify: {
+  workflow_id: 'your_dify_workflow_id_here',
+  inputs_keys: [
+    'chart_data',
+    'chart_title',
+    'chart_type',
+    'date',
+    'region',
+    'style',
+    'length'
+  ]
+}
+Dify service error: {
+  message: 'Request failed with status code 401',
+  status: 401,
+  data: {
+    code: 'unauthorized',
+    message: 'Access token is invalid',
+    status: 401
+  }
+}
+Dify generation failed, using template fallback: Dify authentication failed. Please check API key.

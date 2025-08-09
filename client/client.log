@@ -1,0 +1,550 @@
+
+> client@0.1.0 start
+> react-scripts start
+
+(node:33991) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:33991) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(node:33991) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view client in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://172.20.10.8:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+No issues found.
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/DJButton.tsx:63:44
+TS2339: Property 'text' does not exist on type 'ApiResponse<any>'.
+    61 |       const djResponse = await apiService.generateDJComplete('daily-top', 'standard');
+    62 |       
+  > 63 |       if (djResponse.success && djResponse.text) {
+       |                                            ^^^^
+    64 |         // 生成されたDJトークを使用
+    65 |         setTranscript(djResponse.text);
+    66 |       } else {
+
+ERROR in src/components/DJButton.tsx:65:34
+TS2339: Property 'text' does not exist on type 'ApiResponse<any>'.
+    63 |       if (djResponse.success && djResponse.text) {
+    64 |         // 生成されたDJトークを使用
+  > 65 |         setTranscript(djResponse.text);
+       |                                  ^^^^
+    66 |       } else {
+    67 |         // フォールバック: モックデータを使用
+    68 |         const randomTranscript = mockDJTranscripts[Math.floor(Math.random() * mockDJTranscripts.length)];
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/DJButton.tsx:63:44
+TS2339: Property 'text' does not exist on type 'ApiResponse<any>'.
+    61 |       const djResponse = await apiService.generateDJComplete('daily-top', 'standard');
+    62 |       
+  > 63 |       if (djResponse.success && djResponse.text) {
+       |                                            ^^^^
+    64 |         // 生成されたDJトークを使用
+    65 |         setTranscript(djResponse.text);
+    66 |       } else {
+
+ERROR in src/components/DJButton.tsx:65:34
+TS2339: Property 'text' does not exist on type 'ApiResponse<any>'.
+    63 |       if (djResponse.success && djResponse.text) {
+    64 |         // 生成されたDJトークを使用
+  > 65 |         setTranscript(djResponse.text);
+       |                                  ^^^^
+    66 |       } else {
+    67 |         // フォールバック: モックデータを使用
+    68 |         const randomTranscript = mockDJTranscripts[Math.floor(Math.random() * mockDJTranscripts.length)];
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/DJButton.tsx
+  Line 3:8:  'TypewriterText' is defined but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/DJButton.tsx
+  Line 3:8:  'TypewriterText' is defined but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+ERROR in src/components/DJButton.tsx:64:44
+TS2339: Property 'text' does not exist on type 'ApiResponse<any>'.
+    62 |       const djResponse = await apiService.generateDJComplete('daily-top', 'standard');
+    63 |       
+  > 64 |       if (djResponse.success && djResponse.text) {
+       |                                            ^^^^
+    65 |         // 生成されたDJトークを使用
+    66 |         setTranscript(djResponse.text);
+    67 |       } else {
+
+ERROR in src/components/DJButton.tsx:66:34
+TS2339: Property 'text' does not exist on type 'ApiResponse<any>'.
+    64 |       if (djResponse.success && djResponse.text) {
+    65 |         // 生成されたDJトークを使用
+  > 66 |         setTranscript(djResponse.text);
+       |                                  ^^^^
+    67 |       } else {
+    68 |         // フォールバック: モックデータを使用
+    69 |         const randomTranscript = mockDJTranscripts[Math.floor(Math.random() * mockDJTranscripts.length)];
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/DJButton.tsx
+  Line 3:8:    'TypewriterText' is defined but never used             @typescript-eslint/no-unused-vars
+  Line 14:10:  'useTypewriter' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 14:25:  'setUseTypewriter' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/DJButton.tsx
+  Line 3:8:    'TypewriterText' is defined but never used             @typescript-eslint/no-unused-vars
+  Line 14:10:  'useTypewriter' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 14:25:  'setUseTypewriter' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+ERROR in src/components/DJButton.tsx:65:44
+TS2339: Property 'text' does not exist on type 'ApiResponse<any>'.
+    63 |       const djResponse = await apiService.generateDJComplete('daily-top', 'standard');
+    64 |       
+  > 65 |       if (djResponse.success && djResponse.text) {
+       |                                            ^^^^
+    66 |         // 生成されたDJトークを使用
+    67 |         setTranscript(djResponse.text);
+    68 |       } else {
+
+ERROR in src/components/DJButton.tsx:67:34
+TS2339: Property 'text' does not exist on type 'ApiResponse<any>'.
+    65 |       if (djResponse.success && djResponse.text) {
+    66 |         // 生成されたDJトークを使用
+  > 67 |         setTranscript(djResponse.text);
+       |                                  ^^^^
+    68 |       } else {
+    69 |         // フォールバック: モックデータを使用
+    70 |         const randomTranscript = mockDJTranscripts[Math.floor(Math.random() * mockDJTranscripts.length)];
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/DJButton.tsx
+  Line 14:25:  'setUseTypewriter' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/DJButton.tsx
+  Line 14:25:  'setUseTypewriter' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+ERROR in src/components/DJButton.tsx:65:44
+TS2339: Property 'text' does not exist on type 'ApiResponse<any>'.
+    63 |       const djResponse = await apiService.generateDJComplete('daily-top', 'standard');
+    64 |       
+  > 65 |       if (djResponse.success && djResponse.text) {
+       |                                            ^^^^
+    66 |         // 生成されたDJトークを使用
+    67 |         setTranscript(djResponse.text);
+    68 |       } else {
+
+ERROR in src/components/DJButton.tsx:67:34
+TS2339: Property 'text' does not exist on type 'ApiResponse<any>'.
+    65 |       if (djResponse.success && djResponse.text) {
+    66 |         // 生成されたDJトークを使用
+  > 67 |         setTranscript(djResponse.text);
+       |                                  ^^^^
+    68 |       } else {
+    69 |         // フォールバック: モックデータを使用
+    70 |         const randomTranscript = mockDJTranscripts[Math.floor(Math.random() * mockDJTranscripts.length)];
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/DJButton.tsx:65:44
+TS2339: Property 'text' does not exist on type 'ApiResponse<any>'.
+    63 |       const djResponse = await apiService.generateDJComplete('daily-top', 'standard');
+    64 |       
+  > 65 |       if (djResponse.success && djResponse.text) {
+       |                                            ^^^^
+    66 |         // 生成されたDJトークを使用
+    67 |         setTranscript(djResponse.text);
+    68 |       } else {
+
+ERROR in src/components/DJButton.tsx:67:34
+TS2339: Property 'text' does not exist on type 'ApiResponse<any>'.
+    65 |       if (djResponse.success && djResponse.text) {
+    66 |         // 生成されたDJトークを使用
+  > 67 |         setTranscript(djResponse.text);
+       |                                  ^^^^
+    68 |       } else {
+    69 |         // フォールバック: モックデータを使用
+    70 |         const randomTranscript = mockDJTranscripts[Math.floor(Math.random() * mockDJTranscripts.length)];
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/DJButton.tsx:65:44
+TS2339: Property 'text' does not exist on type 'ApiResponse<any>'.
+    63 |       const djResponse = await apiService.generateDJComplete('daily-top', 'standard');
+    64 |       
+  > 65 |       if (djResponse.success && djResponse.text) {
+       |                                            ^^^^
+    66 |         // 生成されたDJトークを使用
+    67 |         setTranscript(djResponse.text);
+    68 |       } else {
+
+ERROR in src/components/DJButton.tsx:67:34
+TS2339: Property 'text' does not exist on type 'ApiResponse<any>'.
+    65 |       if (djResponse.success && djResponse.text) {
+    66 |         // 生成されたDJトークを使用
+  > 67 |         setTranscript(djResponse.text);
+       |                                  ^^^^
+    68 |       } else {
+    69 |         // フォールバック: モックデータを使用
+    70 |         const randomTranscript = mockDJTranscripts[Math.floor(Math.random() * mockDJTranscripts.length)];
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+No issues found.
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/DJButton.tsx
+  Line 4:8:  'SpeechControls' is defined but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/DJButton.tsx
+  Line 4:8:  'SpeechControls' is defined but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/DJButton.tsx
+  Line 4:8:    'SpeechControls' is defined but never used             @typescript-eslint/no-unused-vars
+  Line 16:10:  'speechEnabled' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 16:25:  'setSpeechEnabled' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/DJButton.tsx
+  Line 4:8:    'SpeechControls' is defined but never used             @typescript-eslint/no-unused-vars
+  Line 16:10:  'speechEnabled' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 16:25:  'setSpeechEnabled' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 75:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 75:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 75:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 75:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 75:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 75:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+ERROR in src/components/DJButton.tsx:69:23
+TS2345: Argument of type '{}' is not assignable to parameter of type 'SetStateAction<string>'.
+    67 |       if (djResponse.success && 'text' in djResponse && djResponse.text) {
+    68 |         // 生成されたDJトークを使用
+  > 69 |         setTranscript(djResponse.text);
+       |                       ^^^^^^^^^^^^^^^
+    70 |       } else {
+    71 |         // フォールバック: モックデータを使用
+    72 |         const randomTranscript = mockDJTranscripts[Math.floor(Math.random() * mockDJTranscripts.length)];
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 75:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 75:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 75:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 75:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 102:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 102:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+ERROR in src/hooks/useSpeechSynthesis.ts:83:25
+TS2345: Argument of type '(prev: SpeechSettings) => { voice: SpeechSynthesisVoice | undefined; rate: number; pitch: number; volume: number; }' is not assignable to parameter of type 'SetStateAction<SpeechSettings>'.
+  Type '(prev: SpeechSettings) => { voice: SpeechSynthesisVoice | undefined; rate: number; pitch: number; volume: number; }' is not assignable to type '(prevState: SpeechSettings) => SpeechSettings'.
+    Call signature return types '{ voice: SpeechSynthesisVoice | undefined; rate: number; pitch: number; volume: number; }' and 'SpeechSettings' are incompatible.
+      The types of 'voice' are incompatible between these types.
+        Type 'SpeechSynthesisVoice | undefined' is not assignable to type 'SpeechSynthesisVoice | null'.
+          Type 'undefined' is not assignable to type 'SpeechSynthesisVoice | null'.
+    81 |
+    82 |           if (priorityVoices.length > 0) {
+  > 83 |             setSettings(prev => ({ 
+       |                         ^^^^^^^^^^^
+  > 84 |               ...prev, 
+       | ^^^^^^^^^^^^^^^^^^^^^^^
+  > 85 |               voice: priorityVoices[0],
+       | ^^^^^^^^^^^^^^^^^^^^^^^
+  > 86 |               // DJ向けの最適化設定
+       | ^^^^^^^^^^^^^^^^^^^^^^^
+  > 87 |               rate: 0.85,  // 少し遅めでより聞き取りやすく
+       | ^^^^^^^^^^^^^^^^^^^^^^^
+  > 88 |               pitch: 1.05, // 少し高めで明るい印象
+       | ^^^^^^^^^^^^^^^^^^^^^^^
+  > 89 |               volume: 0.9  // 少し控えめの音量
+       | ^^^^^^^^^^^^^^^^^^^^^^^
+  > 90 |             }));
+       | ^^^^^^^^^^^^^^^
+    91 |           }
+    92 |         }
+    93 |       };
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 102:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 102:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 102:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 102:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 103:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 103:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 103:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 103:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 103:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 103:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 103:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 103:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 103:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  Line 255:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 103:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  Line 255:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Failed to compile.
+
+Module not found: Error: Can't resolve './DJButton' in '/Users/ogatatakumi/Desktop/Cursor/Spotify Visualize/client/src/components'
+WARNING in [eslint] 
+src/hooks/useSpeechSynthesis.ts
+  Line 103:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  Line 255:6:  React Hook useEffect has a missing dependency: 'settings.voice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+ERROR in ./src/components/SearchPage.tsx 10:0-34
+Module not found: Error: Can't resolve './DJButton' in '/Users/ogatatakumi/Desktop/Cursor/Spotify Visualize/client/src/components'
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/components/SearchPage.tsx:6:22
+TS2307: Cannot find module './DJButton' or its corresponding type declarations.
+    4 | import AISearchSection from './AISearchSection';
+    5 | import EnhancedTrackList from './EnhancedTrackList';
+  > 6 | import DJButton from './DJButton';
+      |                      ^^^^^^^^^^^^
+    7 | import { useAppContext } from '../context/AppContext';
+    8 |
+    9 | const SearchPage: React.FC = () => {
+

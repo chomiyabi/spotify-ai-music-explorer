@@ -5,14 +5,20 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "start:prod": "NODE_ENV=production node dist/index.js",
+    "start:prod": "NODE_ENV=production node --max-old-space-size=512 dist/index.js",
     "dev": "nodemon --exec ts-node src/index.ts",
     "build": "tsc",
     "build:prod": "tsc --build --verbose",
     "clean": "rm -rf dist",
     "rebuild": "npm run clean && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "health": "curl -f http://localhost:5001/api/health || exit 1"
+    "health": "curl -f http://localhost:5001/api/health || exit 1",
+    "setup:dify": "node scripts/setup-dify-workflow.js",
+    "test:dify": "node -e \"const dify=require('./dist/services/difyService').default; dify.healthCheck().then(r=>console.log(JSON.stringify(r,null,2))).catch(e=>console.error(e.message))\"",
+    "dsl": "node scripts/dsl-workflow-cli.js",
+    "dsl:validate": "npm run dsl validate",
+    "dsl:execute": "npm run dsl execute",
+    "dsl:init": "npm run dsl init"
   },
   "keywords": [],
   "author": "",
@@ -23,12 +29,21 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^4.17.21",
     "@types/node": "^24.2.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "axios": "^1.11.0",
+    "colors": "^1.4.0",
+    "commander": "^14.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^4.21.2",
+    "isolated-vm": "^6.0.1",
+    "js-yaml": "^4.1.0",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9"
   }
 }

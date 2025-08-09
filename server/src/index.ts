@@ -5,6 +5,7 @@ import authRoutes from './routes/auth';
 import testRoutes from './routes/test';
 import presetRoutes from './routes/preset';
 import aiRoutes from './routes/ai';
+import djRoutes from './routes/dj';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 import { apiRateLimiter } from './middleware/rateLimiter';
 
@@ -40,6 +41,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/test', testRoutes);
 app.use('/api/preset', presetRoutes);
 app.use('/api/ai', aiRoutes);
+app.use('/api/dj', djRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);

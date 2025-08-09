@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import PresetSection from './PresetSection';
 import AISearchSection from './AISearchSection';
 import EnhancedTrackList from './EnhancedTrackList';
+import DJButton from './DJButton';
 import { useAppContext } from '../context/AppContext';
 
 const SearchPage: React.FC = () => {
@@ -84,6 +85,25 @@ const SearchPage: React.FC = () => {
       <div className="search-sections">
         <PresetSection />
         <AISearchSection />
+        
+        {/* AI DJ セクション */}
+        <div className="dj-section bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 p-6 rounded-xl mt-6 border border-green-200 dark:border-green-700">
+          <div className="text-center mb-6">
+            <h2 className="text-xl md:text-2xl font-bold text-green-800 dark:text-green-200 mb-2">
+              🎙️ AI DJ
+            </h2>
+            <p className="text-sm md:text-base text-green-700 dark:text-green-300">
+              今日の人気楽曲を元にAIが生成したオリジナルDJトークをお楽しみください
+            </p>
+          </div>
+          
+          <div className="flex justify-center">
+            <DJButton 
+              onPlay={() => console.log('AI DJ started')}
+              className="dj-button-container"
+            />
+          </div>
+        </div>
       </div>
 
       {/* 結果表示 */}

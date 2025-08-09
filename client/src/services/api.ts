@@ -68,6 +68,10 @@ export interface ApiResponse<T = any> {
   success: boolean;
   data?: T;
   error?: string;
+  text?: string; // DJ生成API用
+  variations?: string[]; // DJ生成API用
+  chartData?: any; // DJ生成API用
+  metadata?: any; // DJ生成API用
 }
 
 export const apiService = {
@@ -88,6 +92,22 @@ export const apiService = {
 
   checkToken: async (): Promise<ApiResponse> => {
     const response = await apiClient.get('/auth/token');
+    return response.data;
+  },
+
+  // DJ機能API
+  getDJCharts: async (type: 'daily-top' | 'viral' | 'new-releases'): Promise<ApiResponse> => {
+    const response = await apiClient.get(`/dj/charts/${type}`);
+    return response.data;
+  },
+
+  generateDJText: async (chartData: any, version: 'short' | 'standard' | 'long' | 'variations' = 'standard'): Promise<ApiResponse> => {
+    const response = await apiClient.post('/dj/generate-text', { chartData, version });
+    return response.data;
+  },
+
+  generateDJComplete: async (type: 'daily-top' | 'viral' | 'new-releases', version: 'short' | 'standard' | 'long' | 'variations' = 'standard'): Promise<ApiResponse> => {
+    const response = await apiClient.get(`/dj/generate/${type}/${version}`);
     return response.data;
   },
 

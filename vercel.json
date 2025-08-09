@@ -1,3 +1,9 @@
 {
-  "rootDirectory": "client"
+  "rootDirectory": "client",
+  "buildCommand": "npm run build:prod",
+  "outputDirectory": "build",
+  "framework": "create-react-app",
+  "env": {
+    "REACT_APP_API_URL": "https://spotify-ai-music-explorer-production.railway.app"
+  }
 }

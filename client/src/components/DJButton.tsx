@@ -90,6 +90,9 @@ const DJButton: React.FC<DJButtonProps> = ({ onPlay, className = '' }) => {
       const apiUrl = `${API_BASE_URL}/api/dj/play`;
       
       console.log('Calling DJ API:', apiUrl);
+      console.log('=== MOBILE DEBUG: FETCH REQUEST START ===');
+      console.log('User Agent:', navigator.userAgent);
+      console.log('Is Mobile:', /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
       
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -97,6 +100,11 @@ const DJButton: React.FC<DJButtonProps> = ({ onPlay, className = '' }) => {
           'Content-Type': 'application/json',
         },
       });
+
+      console.log('=== MOBILE DEBUG: FETCH RESPONSE ===');
+      console.log('Response Status:', response.status);
+      console.log('Response Status Text:', response.statusText);
+      console.log('Response Headers:', Object.fromEntries(response.headers.entries()));
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -114,12 +122,19 @@ const DJButton: React.FC<DJButtonProps> = ({ onPlay, className = '' }) => {
       console.log('Response type:', response.type);
 
       // 音声データをBlobとして取得
+      console.log('=== MOBILE DEBUG: AUDIO BLOB PROCESSING ===');
       const audioBlob = await response.blob();
       console.log('Audio blob size:', audioBlob.size);
       console.log('Audio blob type:', audioBlob.type);
+      console.log('Audio blob valid:', audioBlob.size > 0);
+      
+      if (audioBlob.size === 0) {
+        throw new Error('Received empty audio data');
+      }
       
       const audioUrl = URL.createObjectURL(audioBlob);
       console.log('Audio URL created:', audioUrl);
+      console.log('Blob URL valid:', audioUrl.startsWith('blob:'));
 
       // 古いAudio要素をクリーンアップ
       if (audioRef.current) {
@@ -127,6 +142,7 @@ const DJButton: React.FC<DJButtonProps> = ({ onPlay, className = '' }) => {
         audioRef.current = null;
       }
 
+      console.log('=== MOBILE DEBUG: AUDIO ELEMENT SETUP ===');
       const audio = new Audio();
       audioRef.current = audio;
       
@@ -138,6 +154,14 @@ const DJButton: React.FC<DJButtonProps> = ({ onPlay, className = '' }) => {
       // モバイルブラウザ対応の設定
       audio.setAttribute('playsinline', 'true');
       audio.setAttribute('webkit-playsinline', 'true');
+      
+      console.log('Audio element configured:', {
+        preload: audio.preload,
+        volume: audio.volume,
+        crossOrigin: audio.crossOrigin,
+        playsinline: audio.getAttribute('playsinline'),
+        webkitPlaysinline: audio.getAttribute('webkit-playsinline')
+      });
 
       // 音声イベントリスナーを設定
       const handleCanPlay = () => {
@@ -280,12 +304,20 @@ const DJButton: React.FC<DJButtonProps> = ({ onPlay, className = '' }) => {
       });
 
       // 音声ソースを設定
+      console.log('=== MOBILE DEBUG: AUDIO SOURCE SETUP ===');
       audio.src = audioUrl;
-      console.log('Audio src set, starting load...');
+      console.log('Audio src set:', audio.src);
+      console.log('Audio readyState before load:', audio.readyState);
+      console.log('Audio networkState before load:', audio.networkState);
+      
+      console.log('Starting audio load...');
       audio.load();
+      
+      console.log('Audio readyState after load:', audio.readyState);
+      console.log('Audio networkState after load:', audio.networkState);
 
-      // デバッグ用: 音声要素をDOMに一時的に追加
-      if (process.env.NODE_ENV === 'development') {
+      // デバッグ用: 音声要素をDOMに一時的に追加（本番環境でも有効）
+      if (process.env.NODE_ENV === 'development' || process.env.REACT_APP_DEBUG === 'true') {
         audio.style.position = 'fixed';
         audio.style.top = '10px';
         audio.style.right = '10px';
@@ -486,10 +518,22 @@ const DJButton: React.FC<DJButtonProps> = ({ onPlay, className = '' }) => {
           </div>
         )}
 
-        {/* デバッグ情報（開発環境のみ） */}
-        {process.env.NODE_ENV === 'development' && (
-          <div className="debug-info">
-            State: {state} | Audio: {isAudioLoaded ? 'loaded' : 'not loaded'}
+        {/* デバッグ情報（開発環境・モバイルデバッグ時） */}
+        {(process.env.NODE_ENV === 'development' || process.env.REACT_APP_DEBUG === 'true') && (
+          <div className="debug-info" style={{
+            background: '#333',
+            color: '#fff',
+            padding: '10px',
+            margin: '10px 0',
+            borderRadius: '5px',
+            fontSize: '12px',
+            fontFamily: 'monospace'
+          }}>
+            <div>State: {state} | Audio: {isAudioLoaded ? 'loaded' : 'not loaded'}</div>
+            <div>User Agent: {navigator.userAgent}</div>
+            <div>Is Mobile: {/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'Yes' : 'No'}</div>
+            <div>API URL: {process.env.REACT_APP_API_URL || 'http://localhost:5001'}</div>
+            <div>Debug Mode: {process.env.REACT_APP_DEBUG || 'false'}</div>
           </div>
         )}
       </div>

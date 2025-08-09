@@ -215,6 +215,13 @@ router.post('/generate-voice', async (req: Request, res: Response) => {
 // DJ機能の統合エンドポイント（1回のリクエストでアーティスト取得から音声生成まで）
 router.post('/play', async (req: Request, res: Response) => {
   try {
+    // デバッグ：リクエスト詳細ログ
+    console.log('=== DJ PLAY REQUEST START ===');
+    console.log('User-Agent:', req.headers['user-agent']);
+    console.log('Origin:', req.headers.origin);
+    console.log('Referer:', req.headers.referer);
+    console.log('Request IP:', req.ip);
+    console.log('Request Headers:', JSON.stringify(req.headers, null, 2));
     // Step 1: バイラルトップ3を取得
     console.log('Step 1: Fetching viral top 3 tracks...');
     
@@ -256,7 +263,13 @@ router.post('/play', async (req: Request, res: Response) => {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // モック音声データを生成
+      console.log('Generating mock audio buffer...');
       const mockAudioBuffer = generateMockAudio(top3Artists);
+      console.log('Mock audio buffer generated:', {
+        size: mockAudioBuffer.length,
+        type: 'Buffer',
+        isBuffer: Buffer.isBuffer(mockAudioBuffer)
+      });
       
       res.setHeader('Content-Type', 'audio/wav');
       res.setHeader('Content-Disposition', 'attachment; filename="demo-dj-talk.wav"');
@@ -267,6 +280,12 @@ router.post('/play', async (req: Request, res: Response) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
       res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+      
+      console.log('Sending mock audio response, headers:', {
+        contentType: res.getHeader('Content-Type'),
+        contentLength: mockAudioBuffer.length,
+        artists: res.getHeader('X-DJ-Artists')
+      });
       
       return res.send(mockAudioBuffer);
     }

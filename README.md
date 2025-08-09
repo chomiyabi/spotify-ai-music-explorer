@@ -1,12 +1,20 @@
-# Spotify Data Visualization Application
+# 🎵 Spotify AI Music Explorer
 
-Spotifyの音楽データを視覚的に表示し、ユーザーが簡単に音楽トレンドを探索できるアプリケーションです。
+Spotifyの音楽データを視覚的に表示し、AIによる自然言語検索と音声DJ機能を備えた次世代音楽発見アプリケーションです。
 
-## 機能
+## ✨ 主要機能
 
-- プリセットボタンによる人気データの即座表示
-- AIを活用したフリーテキスト検索
-- ユーザーログイン不要で利用可能
+- **🎙️ AI DJラジオ**: Dify AIによるオリジナルDJトーク音声生成
+- **🔍 AI自然言語検索**: Claude AIによる「雨の日に聞きたい音楽」などの自然な検索
+- **🎯 10種類のプリセット**: 日本のバイラル、世界のTop50など即座表示
+- **🎵 30秒プレビュー再生**: HTML5 Audio APIによる楽曲試聴
+- **📱 完全レスポンシブ**: スマホ・タブレット対応
+- **🚫 ログイン不要**: 誰でも即座に利用可能
+
+## 🌐 本番環境
+
+**🔗 Live Demo**: https://spotify-ai-music-explorer.vercel.app  
+**📡 API Server**: https://spotify-ai-music-explorer.up.railway.app
 
 ## セットアップ
 

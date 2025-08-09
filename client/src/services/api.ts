@@ -2,7 +2,11 @@ import axios from 'axios';
 
 // APIベースURLの設定（末尾の/apiがない場合は追加）
 const API_BASE_URL = (() => {
-  const url = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+  // 本番環境では Railway のURLを使用
+  const isProd = window.location.hostname !== 'localhost';
+  const url = isProd 
+    ? 'https://spotify-ai-music-explorer-production.railway.app'
+    : (process.env.REACT_APP_API_URL || 'http://localhost:5001');
   // URLが/apiで終わっていない場合は追加
   return url.endsWith('/api') ? url : `${url}/api`;
 })();

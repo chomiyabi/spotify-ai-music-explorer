@@ -6,6 +6,7 @@ import Layout from './components/Layout';
 import LandingPage from './components/LandingPage';
 import SearchPage from './components/SearchPage';
 import DebugInfo from './components/DebugInfo';
+import DebugBanner from './components/DebugBanner';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             </div>
           </Layout>
           <DebugInfo />
+          <DebugBanner />
         </Router>
       </AppProvider>
     </ErrorBoundary>

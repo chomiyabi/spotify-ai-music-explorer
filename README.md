@@ -14,7 +14,8 @@ Spotifyの音楽データを視覚的に表示し、AIによる自然言語検�
 ## 🌐 本番環境
 
 **🔗 Live Demo**: https://spotify-ai-music-explorer.vercel.app  
-**📡 API Server**: https://spotify-ai-music-explorer.up.railway.app
+**📡 API Server**: https://spotify-ai-music-explorer-production.railway.app  
+**🔄 Last Update**: 2025-08-10 03:40 JST
 
 ## セットアップ
 

@@ -124,7 +124,7 @@ router.post('/generate-voice', async (req: Request, res: Response) => {
 
     const difyApiUrl = process.env.DIFY_API_URL || 'https://api.dify.ai';
     const difyApiKey = process.env.DIFY_API_KEY;
-    const workflowId = process.env.DIFY_WORKFLOW_ID || '12bbfe93-0d89-44e0-802b-276aeff8fbe8';
+    const workflowId = process.env.DIFY_WORKFLOW_ID || 'f61cb5b5-6760-40bb-8dfd-2a58fa70e3d8';
 
     // デモモード: APIキーが設定されていない場合はモック音声を返す
     if (!difyApiKey || difyApiKey === 'your_dify_api_key_here') {
@@ -252,7 +252,7 @@ router.post('/play', async (req: Request, res: Response) => {
     
     const difyApiUrl = process.env.DIFY_API_URL || 'https://api.dify.ai';
     const difyApiKey = process.env.DIFY_API_KEY;
-    const workflowId = process.env.DIFY_WORKFLOW_ID || '12bbfe93-0d89-44e0-802b-276aeff8fbe8';
+    const workflowId = process.env.DIFY_WORKFLOW_ID || 'f61cb5b5-6760-40bb-8dfd-2a58fa70e3d8';
 
     // デモモード確認（旧設定値の場合）
     if (!difyApiKey || difyApiKey === 'your_dify_api_key_here') {

@@ -1,14 +1,18 @@
 import axios from 'axios';
 
-// APIベースURLの設定（末尾の/apiがない場合は追加）
+// APIベースURLの設定（開発環境では強制的にlocalhost使用）
 const API_BASE_URL = (() => {
-  // 本番環境では Railway のURLを使用
-  const isProd = window.location.hostname !== 'localhost';
-  const url = isProd 
-    ? 'https://spotify-ai-music-explorer-production.railway.app'
-    : (process.env.REACT_APP_API_URL || 'http://localhost:5001');
-  // URLが/apiで終わっていない場合は追加
-  return url.endsWith('/api') ? url : `${url}/api`;
+  // 開発時の強制設定 - localhost:3001で動作中はlocalhostのAPIを使用
+  const forcedLocalUrl = 'http://localhost:5001/api';
+  console.log('FORCED LOCAL API URL (for development):', forcedLocalUrl);
+  return forcedLocalUrl;
+  
+  // NOTE: 本番デプロイ時は以下のコードに戻す
+  // const hostname = window.location.hostname;
+  // const isProduction = hostname !== 'localhost' && hostname !== '127.0.0.1' && hostname !== '::1';
+  // return isProduction 
+  //   ? 'https://spotify-ai-music-explorer-production.railway.app/api'
+  //   : 'http://localhost:5001/api';
 })();
 
 const apiClient = axios.create({
@@ -175,6 +179,27 @@ export const apiService = {
 
   aiInterpret: async (query: string): Promise<ApiResponse> => {
     const response = await apiClient.post('/ai/interpret', { query });
+    return response.data;
+  },
+
+  // Phase 11: ニュースレター機能
+  newsletterGetMarkets: async (): Promise<ApiResponse> => {
+    const response = await apiClient.get('/newsletter/markets');
+    return response.data;
+  },
+
+  newsletterGetTopArtist: async (country: string): Promise<ApiResponse> => {
+    const response = await apiClient.get('/newsletter/top-artist', {
+      params: { country }
+    });
+    return response.data;
+  },
+
+  newsletterSubscribe: async (email: string, country: string): Promise<ApiResponse> => {
+    const response = await apiClient.post('/newsletter/subscribe', {
+      email,
+      country
+    });
     return response.data;
   },
 };

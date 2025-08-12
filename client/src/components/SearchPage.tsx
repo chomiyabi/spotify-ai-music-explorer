@@ -4,6 +4,7 @@ import PresetSection from './PresetSection';
 import AISearchSection from './AISearchSection';
 import EnhancedTrackList from './EnhancedTrackList';
 import DJButton from './DJButton';
+import NewsletterSubscription from './NewsletterSubscription';
 import { useAppContext } from '../context/AppContext';
 
 const SearchPage: React.FC = () => {
@@ -104,6 +105,9 @@ const SearchPage: React.FC = () => {
             />
           </div>
         </div>
+
+        {/* ニュースレター購読セクション */}
+        <NewsletterSubscription />
       </div>
 
       {/* 結果表示 */}

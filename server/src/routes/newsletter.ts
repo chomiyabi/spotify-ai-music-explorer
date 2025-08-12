@@ -11,11 +11,16 @@ const WEBHOOK_RETRY_CONFIG = {
 
 const router = Router();
 
-// 環境変数の検証
+// 環境変数の検証（Newsletter機能の有効/無効を決定）
 const N8N_WEBHOOK_URL = process.env.N8N_WEBHOOK_URL;
-if (!N8N_WEBHOOK_URL || !N8N_WEBHOOK_URL.startsWith('https://')) {
-  console.error('N8N_WEBHOOK_URL環境変数が設定されていないか、HTTPSではありません');
-  process.exit(1);
+const NEWSLETTER_ENABLED = N8N_WEBHOOK_URL && N8N_WEBHOOK_URL.startsWith('https://');
+
+if (!NEWSLETTER_ENABLED) {
+  console.warn('⚠️  Newsletter機能が無効化されました: N8N_WEBHOOK_URL環境変数が設定されていないか、HTTPSではありません');
+  console.warn('   設定値:', N8N_WEBHOOK_URL || 'undefined');
+  console.warn('   Newsletter機能を有効にするには、有効なHTTPS URLを設定してください');
+} else {
+  console.log('✅ Newsletter機能が有効化されました:', N8N_WEBHOOK_URL);
 }
 
 // セキュリティログ関数
@@ -448,6 +453,19 @@ router.get('/top-artist', async (req: Request, res: Response) => {
 // ニュースレター購読（n8n Webhook連携）
 router.post('/subscribe', async (req: Request, res: Response) => {
   try {
+    // Newsletter機能が無効な場合のエラーハンドリング
+    if (!NEWSLETTER_ENABLED) {
+      console.warn('Newsletter subscribe attempt with disabled service:', {
+        ip: req.ip,
+        userAgent: req.get('User-Agent')
+      });
+      return res.status(503).json({
+        success: false,
+        error: 'ニュースレター機能は現在利用できません',
+        message: '管理者が環境設定を完了するまでお待ちください'
+      });
+    }
+
     let { email, country } = req.body;
 
     // 入力値の基本チェック
@@ -580,9 +598,8 @@ router.post('/subscribe', async (req: Request, res: Response) => {
 
     const artistName = topArtists[0].name;
 
-    // n8n Webhookに送信
-    const webhookUrl = process.env.N8N_WEBHOOK_URL || 
-      'https://chomiyabi.app.n8n.cloud/webhook/4447ccd3-c50b-4d48-945b-187ad677002a';
+    // n8n Webhookに送信（NEWSLETTER_ENABLEDでチェック済みなのでN8N_WEBHOOK_URLは確実に存在）
+    const webhookUrl = N8N_WEBHOOK_URL!;
     
     const webhookParams = {
       p: encodeURIComponent(artistName),

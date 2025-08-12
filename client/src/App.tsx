@@ -7,8 +7,11 @@ import LandingPage from './components/LandingPage';
 import SearchPage from './components/SearchPage';
 import DebugInfo from './components/DebugInfo';
 import DebugBanner from './components/DebugBanner';
+import DEPLOYMENT_INFO from './deploymentTrigger';
 
 function App() {
+  // 🚀 Latest version with AI DJ & Newsletter features - Build: 2025-08-13T00:15:00Z
+  // Force rebuild trigger: ${DEPLOYMENT_INFO.buildHash}
   return (
     <ErrorBoundary>
       <AppProvider>

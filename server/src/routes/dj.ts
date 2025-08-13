@@ -53,6 +53,22 @@ function generateMockAudio(artistNames: string): Buffer {
 
 const router = Router();
 
+// DJ機能のヘルスチェック
+router.get('/health', (req: Request, res: Response) => {
+  const difyConfigured = !!(process.env.DIFY_API_KEY && process.env.DIFY_API_KEY !== 'your_dify_api_key_here');
+  
+  res.json({
+    status: 'OK',
+    message: 'DJ route is available',
+    dify: {
+      configured: difyConfigured,
+      mode: difyConfigured ? 'production' : 'demo',
+      workflowId: process.env.DIFY_WORKFLOW_ID || 'using default'
+    },
+    timestamp: new Date().toISOString()
+  });
+});
+
 // 日本のバイラルトップ50から上位3曲のアーティスト名を取得
 router.get('/viral-top3', async (req: Request, res: Response) => {
   try {
@@ -220,8 +236,24 @@ router.post('/generate-voice', async (req: Request, res: Response) => {
   }
 });
 
+// CORSプリフライトリクエストのハンドリング
+router.options('/play', (req: Request, res: Response) => {
+  console.log('=== DJ PLAY OPTIONS REQUEST (CORS Preflight) ===');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Max-Age', '86400');
+  res.status(204).send();
+});
+
 // DJ機能の統合エンドポイント（1回のリクエストでアーティスト取得から音声生成まで）
 router.post('/play', async (req: Request, res: Response) => {
+  // CORSヘッダーを最初に設定
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Expose-Headers', 'X-DJ-Artists');
+  
   try {
     // デバッグ：リクエスト詳細ログ
     console.log('=== DJ PLAY REQUEST START ===');

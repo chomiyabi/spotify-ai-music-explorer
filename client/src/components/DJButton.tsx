@@ -94,12 +94,32 @@ const DJButton: React.FC<DJButtonProps> = ({ onPlay, className = '' }) => {
       console.log('User Agent:', navigator.userAgent);
       console.log('Is Mobile:', /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
       
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      let response;
+      try {
+        response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+      } catch (fetchError: any) {
+        console.error('=== FETCH ERROR ===');
+        console.error('Error Type:', fetchError.name);
+        console.error('Error Message:', fetchError.message);
+        console.error('API URL:', apiUrl);
+        console.error('Full Error:', fetchError);
+        
+        // ネットワークエラーの詳細な情報を提供
+        if (fetchError.name === 'TypeError' && fetchError.message.includes('Failed to fetch')) {
+          throw new Error('ネットワークエラー: APIサーバーに接続できません。Railway環境変数が設定されているか確認してください。');
+        } else if (fetchError.message.includes('CORS')) {
+          throw new Error('CORS エラー: サーバー設定を確認してください。');
+        } else if (fetchError.message.includes('NetworkError')) {
+          throw new Error('ネットワークエラー: インターネット接続を確認してください。');
+        } else {
+          throw new Error(`接続エラー: ${fetchError.message}`);
+        }
+      }
 
       console.log('=== MOBILE DEBUG: FETCH RESPONSE ===');
       console.log('Response Status:', response.status);
@@ -107,7 +127,18 @@ const DJButton: React.FC<DJButtonProps> = ({ onPlay, className = '' }) => {
       console.log('Response Headers:', Object.fromEntries(response.headers.entries()));
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        // より詳細なHTTPエラーメッセージ
+        if (response.status === 500) {
+          const errorText = await response.text();
+          console.error('Server Error Response:', errorText);
+          throw new Error('サーバーエラー: AI DJ機能が一時的に利用できません。Railway環境変数を確認してください。');
+        } else if (response.status === 503) {
+          throw new Error('サービス利用不可: サーバーがメンテナンス中の可能性があります。');
+        } else if (response.status === 404) {
+          throw new Error('エンドポイントが見つかりません: APIルートを確認してください。');
+        } else {
+          throw new Error(`HTTP エラー ${response.status}: ${response.statusText}`);
+        }
       }
 
       // レスポンスヘッダーからアーティスト情報を取得

@@ -53,9 +53,10 @@ app.use((req, res, next) => {
     "script-src 'self'; " +
     "style-src 'self' 'unsafe-inline'; " +
     "img-src 'self' data: https:; " +
-    "connect-src 'self' https://api.spotify.com https://*.n8n.cloud; " +
+    "connect-src 'self' https://api.spotify.com https://*.n8n.cloud https://api.dify.ai; " +
     "font-src 'self'; " +
     "object-src 'none'; " +
+    "media-src 'self' blob:; " +
     "base-uri 'self';"
   );
   

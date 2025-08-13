@@ -6,18 +6,5 @@
   "outputDirectory": "build",
   "framework": "create-react-app",
   "installCommand": "npm install",
-  "env": {
-    "REACT_APP_API_URL": "https://spotify-ai-music-explorer-production.railway.app"
-  },
-  "build": {
-    "env": {
-      "REACT_APP_API_URL": "https://spotify-ai-music-explorer-production.railway.app"
-    }
-  },
-  "functions": {
-    "app.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "regions": ["iad1", "nrt1"]
 }

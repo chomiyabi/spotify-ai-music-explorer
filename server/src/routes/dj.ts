@@ -126,9 +126,17 @@ router.post('/generate-voice', async (req: Request, res: Response) => {
     const difyApiKey = process.env.DIFY_API_KEY;
     const workflowId = process.env.DIFY_WORKFLOW_ID || 'f61cb5b5-6760-40bb-8dfd-2a58fa70e3d8';
 
+    // 環境変数の状態をログ出力（デバッグ用）
+    console.log('DJ Generate Voice - Environment Check:');
+    console.log('- DIFY_API_KEY exists:', !!difyApiKey);
+    console.log('- DIFY_API_KEY value:', difyApiKey ? 'app-***' + difyApiKey.slice(-4) : 'not set');
+    console.log('- DIFY_WORKFLOW_ID:', workflowId);
+    console.log('- DIFY_API_URL:', difyApiUrl);
+    
     // デモモード: APIキーが設定されていない場合はモック音声を返す
     if (!difyApiKey || difyApiKey === 'your_dify_api_key_here') {
-      console.log('Demo mode: Using mock DJ voice generation for artists:', artistNames);
+      console.log('⚠️  Demo mode: Using mock DJ voice generation for artists:', artistNames);
+      console.log('💡 To enable real AI DJ, set DIFY_API_KEY environment variable');
       
       // モック音声データを生成（サイレント音声データ）
       const mockAudioBuffer = generateMockAudio(artistNames);

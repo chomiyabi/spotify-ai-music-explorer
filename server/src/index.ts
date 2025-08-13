@@ -93,4 +93,41 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   console.log(`Health check: http://localhost:${PORT}/api/health`);
   console.log(`Test search: http://localhost:${PORT}/api/test/search?q=shape of you`);
+  
+  // 環境変数の状態をログ出力
+  console.log('\n🔧 Environment Configuration:');
+  console.log('================================');
+  
+  // Spotify API
+  if (process.env.SPOTIFY_CLIENT_ID && process.env.SPOTIFY_CLIENT_SECRET) {
+    console.log('✅ Spotify API: Configured');
+  } else {
+    console.log('❌ Spotify API: Missing credentials');
+  }
+  
+  // Dify AI Integration
+  if (process.env.DIFY_API_KEY && process.env.DIFY_API_KEY !== 'your_dify_api_key_here') {
+    console.log('✅ Dify AI: Configured (API Key: app-***' + process.env.DIFY_API_KEY?.slice(-4) + ')');
+    console.log('   - Workflow ID:', process.env.DIFY_WORKFLOW_ID || 'Using default');
+    console.log('   - API URL:', process.env.DIFY_API_URL || 'Using default');
+  } else {
+    console.log('⚠️  Dify AI: Demo mode (No API key configured)');
+    console.log('   💡 Set DIFY_API_KEY environment variable for AI DJ feature');
+  }
+  
+  // Newsletter Integration
+  if (process.env.N8N_WEBHOOK_URL && process.env.N8N_WEBHOOK_URL.startsWith('https://')) {
+    console.log('✅ Newsletter: Configured');
+  } else {
+    console.log('⚠️  Newsletter: Disabled (No webhook URL configured)');
+  }
+  
+  // Claude AI
+  if (process.env.CLAUDE_API_KEY && process.env.CLAUDE_API_KEY !== 'your_claude_api_key_here') {
+    console.log('✅ Claude AI: Configured');
+  } else {
+    console.log('⚠️  Claude AI: Not configured (AI search will use fallback)');
+  }
+  
+  console.log('================================\n');
 });
